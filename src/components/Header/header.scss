@@ -1,0 +1,118 @@
+$topbar-bg-color: #23124b;
+$logo-font-size: 24px;
+$logo-margin-left: 20px;
+$logo-font-weight: bold;
+$searchbar-bg-color: white;
+$searchbar-border-radius: 30px;
+$searchIcon-font-size: 20px !important;
+$searchIcon-margin-left: 10px;
+$topbarLink-margin-right: 10px;
+$topbarLink-font-size: 14px;
+$topbarIconItem-margin-right: 15px;
+$topbarIconBadge-width: 15px;
+$topbarIconBadge-height: 15px;
+$topbarIconBadge-bg-color: rgb(250, 24, 99);
+$topbarIconBadge-border-radius: 50%;
+$topbarIconBadge-color: white;
+$topbarIconBadge-font-size: 12px;
+$topbarImg-width: 32px;
+$topbarImg-height: 32px;
+$topbarImg-border-radius: 50%;
+$topbarImg-object-fit: cover;
+
+.topbarContainer {
+  height: 50px;
+  width: 100%;
+  background-color: $topbar-bg-color;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  
+  .topbarLeft {
+    flex: 3;
+    
+    .logo {
+      font-size: $logo-font-size;
+      margin-left: $logo-margin-left;
+      font-weight: $logo-font-weight;
+      color: white;
+      cursor: pointer;
+    }
+  }
+  
+  .topbarCenter {
+    flex: 5;
+    
+    .searchbar {
+      width: 100%;
+      height: 30px;
+      background-color: $searchbar-bg-color;
+      border-radius: $searchbar-border-radius;
+      display: flex;
+      align-items: center;
+      
+      .searchIcon {
+        font-size: $searchIcon-font-size;
+        margin-left: $searchIcon-margin-left;
+      }
+      
+      .searchInput {
+        border: none;
+        width: 70%;
+        
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+  
+  .topbarRight {
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    
+    .topbarLink {
+      margin-right: $topbarLink-margin-right;
+      font-size: $topbarLink-font-size;
+      cursor: pointer;
+    }
+    
+    .topbarIcons {
+      display: flex;
+      
+      .topbarIconItem {
+        margin-right: $topbarIconItem-margin-right;
+        cursor: pointer;
+        position: relative;
+        
+        .topbarIconBadge {
+          width: $topbarIconBadge-width;
+          height: $topbarIconBadge-height;
+          background-color: $topbarIconBadge-bg-color;
+          border-radius: $topbarIconBadge-border-radius;
+          color: $topbarIconBadge-color;
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: $topbarIconBadge-font-size;
+        }
+      }
+    }
+    
+    .topbarImg {
+      width: $topbarImg-width;
+      height: $topbarImg-height;
+      border-radius: $topbarImg-border-radius;
+      object-fit: $topbarImg-object-fit;
+      cursor: pointer;
+    }
+  }
+}
