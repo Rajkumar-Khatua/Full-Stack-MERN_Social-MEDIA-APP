@@ -48,9 +48,17 @@ router.delete("/:id", async (req, res) => {
    }
 })
 // GET A USER
-router.get("/:id", async (req, res) => {
+// router.get("/:id", async (req, res) => {  This method is only for userid
+router.get("/", async (req, res) => {
+   // we can use the both query if any of them is not available
+   // define user_ID
+   const userId = req.query.userId;
+   // define username
+   const username = req.query.username;
    try {
-      const user = await User.findById(req.params.id);
+      const user = userId
+         ? await User.findById(userId)   //if write userId call this one
+         : await User.findOne({ username: username }); //if write username call this one
       // filter the unessery user information or private information password 
       // this doc is carred all the user information
       const { password, updatedAt, ...other } = user._doc

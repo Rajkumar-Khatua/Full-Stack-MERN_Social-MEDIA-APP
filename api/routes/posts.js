@@ -116,10 +116,23 @@ router.get('/timeline/:userId', async (req, res) => {
         const userPosts = await Post.find({ userId: currentUser._id });
         const friendsPosts = await Promise.all(
             currentUser.followings.map((friendId) => {
-               return Post.find({ userId: friendId });
+                return Post.find({ userId: friendId });
             })
         );
         res.status(200).json(userPosts.concat(...friendsPosts))
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
+// get user all posts
+router.get('/profile/:username', async (req, res) => {
+    try {
+        // find the user
+        const user = await User.findOne({ username: req.params.username });
+        // chech the current user is equal to the DB user?
+        const posts = await Post.find({ userId: user._id });
+        res.status(200).json(posts)
     } catch (error) {
         res.status(500).json(error);
     }
