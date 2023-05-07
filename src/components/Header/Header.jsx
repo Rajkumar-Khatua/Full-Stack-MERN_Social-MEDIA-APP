@@ -1,17 +1,24 @@
-import React from "react";
 import "./header.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Person3RoundedIcon from "@mui/icons-material/Person3Rounded";
 import MarkChatReadRoundedIcon from "@mui/icons-material/MarkChatReadRounded";
 import { Notifications, Settings } from "@mui/icons-material";
-import { MenuItem } from "@mui/base";
-import { Menu } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function Header() {
+  const {user} = useContext(AuthContext);
   return (
     <div className='topbarContainer'>
       <div className='topbarLeft'>
-        <span className='logo'>TheSocial</span>
+        <span className='logo'>
+          <Link
+            to='/'
+            style={{ color: "inherit", textDecoration: "none" }}>
+            TheSocial
+          </Link>
+        </span>
       </div>
       <div className='topbarCenter'>
         <div className='searchbar'>
@@ -41,11 +48,22 @@ function Header() {
             <span className='topbarIconBadge'>1</span>
           </div>
         </div>
-        <img
-          src='https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg'
-          alt=''
-          className='topbarImg'
-        />
+        <Link to={`/profile/${user.username}`}>
+          <img
+            src={
+              // user.profilePicture
+              //   ? user.profilePicture
+              //   : user.profilePicture +
+              //     "https://icon-library.com/images/default-profile-icon/default-profile-icon-3.jpg"
+              user.profilePicture  || "https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg"
+            }
+            alt=''
+            className='topbarImg'
+          />
+        </Link>
+        <Link to={`/profile/${user.username}`}>
+        <span  style={{textAlign:'center', color:'#fff', marginLeft:-45, fontWeight:'bold',}}>{user.username}</span>
+        </Link>
         <Settings />
       </div>
     </div>

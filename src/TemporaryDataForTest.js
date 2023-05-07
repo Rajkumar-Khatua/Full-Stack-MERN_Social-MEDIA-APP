@@ -1,7 +1,7 @@
 export const Users = [
     {
         id: 1,
-        profilePicture: "https://cdn.pixabay.com/photo/2015/04/27/22/53/man-742766_960_720.jpg",
+        profilePicture: "https://cdn.pixabay.com/photo/2016/12/09/16/53/internet-1895376_960_720.jpg",
         username: "Rajkumar Khatua",
     },
     {

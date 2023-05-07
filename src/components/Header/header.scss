@@ -113,6 +113,10 @@ $topbarImg-object-fit: cover;
       border-radius: $topbarImg-border-radius;
       object-fit: $topbarImg-object-fit;
       cursor: pointer;
+
+      &:hover{
+        border: 2px solid rgb(240, 27, 169);
+      }
     }
   }
 }

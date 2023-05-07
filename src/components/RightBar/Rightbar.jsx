@@ -2,8 +2,9 @@ import React from "react";
 import "./rightbar.scss";
 import { Users } from "../../TemporaryDataForTest";
 import Online from "../Online/Online";
+import { format } from "timeago.js";
 
-function Right() {
+function Right({ user }) {
   // innner components
   const HomeRightBar = () => {
     return (
@@ -42,95 +43,44 @@ function Right() {
   const ProfileRightBar = () => {
     return (
       <>
-        <h4 className="rightBarTitle">User Information</h4>
-        <div className="rightbarInfo">
-          <div className="rightbarInfoItems">
-            <span className="rightBarInfoKey">
-              City: 
-            </span>
-            <span className="rightBarInfoVal">
-              United Kingdom
-            </span>
+        <h4 className='rightBarTitle'>User Information</h4>
+        <div className='rightbarInfo'>
+          <div className='rightbarInfoItems'>
+            <span className='rightBarInfoKey'>City:</span>
+            <span className='rightBarInfoVal'>{user.city}</span>
           </div>
-          <div className="rightbarInfoItems">
-            <span className="rightBarInfoKey">
-              From: 
-            </span>
-            <span className="rightBarInfoVal">
-              India
-            </span>
+          <div className='rightbarInfoItems'>
+            <span className='rightBarInfoKey'>From:</span>
+            <span className='rightBarInfoVal'>{user.from}</span>
           </div>
-          <div className="rightbarInfoItems">
-            <span className="rightBarInfoKey">
-              Relationship: 
-            </span>
-            <span className="rightBarInfoVal">
-              Commited
-            </span>
+          <div className='rightbarInfoItems'>
+            <span className='rightBarInfoKey'>Relationship:</span>
+            <span className='rightBarInfoVal'>{user.reslationship ===1 ? "Single" : user.reslationship===2 ? "Married" : "Complecated"}</span>
           </div>
-          <h4 className="rightBarTitle">
-            My Friends
-          </h4>
-          <div className="rightbarFollowings">
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
-            </div>
-            <div className="rightbarFollowg">
-              <img src="https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg" alt="" className="rightbarFollowingImg" />
-              <span className="rightbarFollowingName">Brock Lesner.</span>
+          <div className='rightbarInfoItems'>
+            <span className='rightBarInfoKey'>Join at:</span>
+            <span className='rightBarInfoVal'>{format(user.createdAt)}</span>
+          </div>
+          <h4 className='rightBarTitle'>My Friends</h4>
+          <div className='rightbarFollowings'>
+            <div className='rightbarFollowg'>
+              <img
+                src='https://cdn.pixabay.com/photo/2014/07/10/11/17/grimace-388987_960_720.jpg'
+                alt=''
+                className='rightbarFollowingImg'
+              />
+              <span className='rightbarFollowingName'>Brock Lesner.</span>
             </div>
           </div>
-          
         </div>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <div className='rightbar'>
       <div className='rightbarWrapper'>
-        <ProfileRightBar/>
+        {user ? <ProfileRightBar /> : <HomeRightBar />}
       </div>
     </div>
   );

@@ -1,32 +1,62 @@
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 import "./login.scss";
+import { loginCall } from "../../ApiCalls";
+import { AuthContext } from "../../context/AuthContext";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Avatar, AvatarGroup, LinearProgress } from "@mui/material";
+
+import { Link } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const email = useRef();
+  const password = useRef();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(`Email: ${email}, Password: ${password}`);
+    loginCall(
+      { email: email.current.value, password: password.current.value },
+      dispatch
+    );
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  console.log(user);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(`Submitting email ${email} and password ${password}`);
-  };
   return (
-    <div className="login-page">
-    <form className="login-form" onSubmit={handleSubmit}>
-      <label htmlFor="email">Email:</label>
-      <input type="email" id="email" value={email} onChange={handleEmailChange} />
-      <label htmlFor="password">Password:</label>
-      <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-      <button type="submit">Login</button>
-    </form>
-  </div>
-  )
+    <div className='login-container'>
+      <h1 className='title1'>
+        Nice to See you Again <br /> <span>Welcome Back</span>{" "}
+      </h1>
+      <h1 className='title'>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Email:</label>
+        <input
+          type='email'
+          required
+          ref={email}
+        />
+
+        <label>Password:</label>
+        <input
+          type='password'
+          minLength={6}
+          required
+          ref={password}
+        />
+
+        <button type='submit'>
+          {isFetching ? <LinearProgress color='#fff' /> : "Login"}
+        </button>
+      </form>
+      <Link to='/register'>
+        <span
+          className='regisBtn'
+          type='submit'>
+          {isFetching ? <LinearProgress color='#fff' /> : "Create new Account"}
+        </span>
+      </Link>
+    </div>
+  );
 }
-export default Login
+export default Login;
